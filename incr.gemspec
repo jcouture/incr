@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage = 'https://github.com/jcouture/incr'
   spec.license = 'MIT'
 
+  spec.files = `git ls-files`.split("\n")
   spec.bindir = 'bin'
   spec.executables << 'incr'
   spec.require_paths << 'lib'
