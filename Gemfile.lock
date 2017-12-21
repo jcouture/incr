@@ -3,12 +3,14 @@ PATH
   specs:
     incr (0.1.0)
       gli (= 2.17.1)
+      rugged (= 0.26.0)
       sem_version (= 2.0.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
     gli (2.17.1)
+    rugged (0.26.0)
     sem_version (2.0.1)
 
 PLATFORMS

@@ -19,4 +19,5 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency('gli', '2.17.1')
   spec.add_runtime_dependency('sem_version', '2.0.1')
+  spec.add_runtime_dependency('rugged', '0.26.0')
 end
