@@ -25,6 +25,12 @@ module Incr
         replace_infile(PACKAGE_LOCK_JSON_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
 
         puts "v#{file_version.to_s}"
+
+        git = Incr::Service::Git.new('.')
+        git.add(PACKAGE_JSON_FILENAME)
+        git.add(PACKAGE_LOCK_JSON_FILENAME)
+        oid = git.commit(new_version.to_s)
+        git.tag("v#{new_version.to_s}", oid)
       end
 
       private
