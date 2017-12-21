@@ -9,11 +9,13 @@ Gem::Specification.new do |spec|
   spec.authors = ['Jean-Philippe Couture']
   spec.email = ['jcouture@gmail.com']
 
-  spec.summary = ''
+  spec.summary = 'Tasteful utility to increment the version number and create a corresponding git tag.'
   spec.homepage = 'https://github.com/jcouture/incr'
   spec.license = 'MIT'
 
   spec.bindir = 'bin'
   spec.executables << 'incr'
   spec.require_paths << 'lib'
+
+  spec.add_runtime_dependency('gli', '2.17.1')
 end

@@ -1,3 +1,11 @@
 #!/usr/bin/env ruby
 
-puts 'Hello, Friend'
+require 'incr'
+require 'gli'
+
+include GLI::App
+
+program_desc('Tasteful utility to increment the version number and create a corresponding git tag.')
+version(Incr::VERSION)
+
+exit(run(ARGV))
