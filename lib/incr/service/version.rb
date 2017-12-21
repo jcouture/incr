@@ -9,8 +9,11 @@ module Incr
         case segment
         when 'major'
           incremented_version.major = version.major + 1
+          incremented_version.minor = 0
+          incremented_version.patch = 0
         when 'minor'
           incremented_version.minor = version.minor + 1
+          incremented_version.patch = 0
         when 'patch'
           incremented_version.patch = version.patch + 1
         end
