@@ -1,43 +1,41 @@
-# Incr
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/incr`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+<p align="center">
+  <a href="https://github.com/jcouture/incr">
+    <img src="https://i.imgur.com/cHimJRm.png" alt="incr" />
+  </a>
+  <br />
+  Incr is a tool to help you easily increment the version number of your NPM or Mix packages.
+  <br /><br />
+  <a href="https://rubygems.org/gems/incr"><img src="http://img.shields.io/gem/v/incr.svg" /></a>
+  <a href="https://codeclimate.com/github/jcouture/incr"><img src="http://img.shields.io/codeclimate/github/jcouture/incr.svg" /></a>
+  <a href="https://gemnasium.com/jcouture/incr"><img src="http://img.shields.io/gemnasium/jcouture/incr.svg" /></a>
+  <a href="https://travis-ci.org/jcouture/incr"><img src="http://img.shields.io/travis/jcouture/incr.svg" /></a>
+</p>
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'incr'
+```shell
+~> gem install incr
 ```
 
-And then execute:
+incr depends on the [Rugged](https://github.com/libgit2/rugged) Ruby bindings for [libgit2](https://libgit2.github.com/). You need to have `CMake` and `pkg-config` installed on your system to be able to build the included version of libgit2.
+On OS X, after installing [Homebrew](https://brew.sh/), you can get CMake with:
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install incr
+```shell
+~> brew install cmake
+```
 
 ## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To increment the patch segment of your NPM package version number:
+```shell
+~> incr npm patch
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/incr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jcouture/incr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
-## Code of Conduct
-
-Everyone interacting in the Incr project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/incr/blob/master/CODE_OF_CONDUCT.md).
+The incr shield logo is based on [this icon](https://thenounproject.com/term/increment/621415/) by [blackspike](https://thenounproject.com/blackspike/), from the Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
