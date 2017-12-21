@@ -1,5 +1,2 @@
-require "incr/version"
-
-module Incr
-  # Your code goes here...
-end
+require 'incr/command/npm.rb'
+require 'incr/version'
