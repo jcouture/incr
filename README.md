@@ -30,6 +30,11 @@ To increment the patch segment of your NPM package version number:
 ~> incr npm patch
 ```
 
+To increment the minor segment of your Mix package version number:
+```shell
+~> incr mix minor
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/jcouture/incr. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
