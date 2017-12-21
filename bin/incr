@@ -25,4 +25,13 @@ command :npm do |cmd|
   end
 end
 
+# Elixir Support
+desc('Increment the version of your Mix package.')
+command :mix do |cmd|
+  cmd.action do |global_options, options, args|
+    mix = Incr::Command::Mix.new(args)
+    mix.execute
+  end
+end
+
 exit(run(ARGV))
