@@ -15,7 +15,7 @@
 
 The process is detailed as follow:
 
-*  Find the relevant file(s) (e.g.: `package.json` and `package-lock.json` or `mix.exs`).
+*  Find the relevant file(s) (e.g.: `package.json` and `package-lock.json`, `mix.exs` or `version.rb`).
 * Determine the existing version number.
 * Increment the specified segment. If you increment the minor segment, the patch segment is set to 0 and the same goes for the major segment, the minor and patch segments are set to 0.
 * Write the newly incremented version number in the relevant file(s).
