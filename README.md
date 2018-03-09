@@ -25,15 +25,6 @@ The process is detailed as follow:
 
 ## Installation
 
-### Prerequisites
-
-incr depends on the [Rugged](https://github.com/libgit2/rugged) Ruby bindings for [libgit2](https://libgit2.github.com/). You need to have `CMake` and `pkg-config` installed on your system to be able to build the included version of libgit2.
-On mac OS, after installing [Homebrew](https://brew.sh/), you can get `CMake` with:
-
-```shell
-~> brew install cmake
-```
-
 ### incr
 
 ```shell
