@@ -1,4 +1,4 @@
-require 'incr/service/git'
+require 'incr/service/repository'
 require 'incr/service/version'
 require 'incr/service/file_helper'
 require 'incr/command/npm'

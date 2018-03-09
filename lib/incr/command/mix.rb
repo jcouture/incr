@@ -20,10 +20,10 @@ module Incr
 
         puts "v#{new_version.to_s}"
 
-        git = Incr::Service::Git.new('.')
-        git.add(MIXFILE_FILENAME)
-        oid = git.commit(new_version.to_s)
-        git.tag("v#{new_version.to_s}", oid)
+        repository = Incr::Service::Repository.new('.')
+        repository.add(MIXFILE_FILENAME)
+        repository.commit(new_version.to_s)
+        repository.tag("v#{new_version.to_s}")
       end
 
       private

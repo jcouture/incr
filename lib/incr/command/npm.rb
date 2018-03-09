@@ -26,11 +26,11 @@ module Incr
 
         puts "v#{new_version.to_s}"
 
-        git = Incr::Service::Git.new('.')
-        git.add(PACKAGE_JSON_FILENAME)
-        git.add(PACKAGE_LOCK_JSON_FILENAME)
-        oid = git.commit(new_version.to_s)
-        git.tag("v#{new_version.to_s}", oid)
+        repository = Incr::Service::Repository.new('.')
+        repository.add(PACKAGE_JSON_FILENAME)
+        repository.add(PACKAGE_LOCK_JSON_FILENAME)
+        repository.commit(new_version.to_s)
+        repository.tag("v#{new_version.to_s}")
       end
 
       private
