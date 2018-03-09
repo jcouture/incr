@@ -16,7 +16,7 @@ module Incr
         file_version = file_content.match(/version:\W*\"(\d*.\d*.\d*)",/)[1]
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
-        Incr::Service::FileHelper.replace(MIXFILE_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(MIXFILE_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
 
         puts "v#{new_version.to_s}"
 
