@@ -10,6 +10,9 @@ include GLI::App
 program_desc('Tasteful utility to increment the version number and create a corresponding git tag.')
 version(Incr::VERSION)
 
+flag [:t,:tagNamePattern], :default_value => 'v%s'
+flag [:d,:versionFileDirectory], :default_value => '.', :desc => 'Directory where to search for version file.'
+
 pre do |global, command, options, args|
   if args.length != 1 || !['major', 'minor', 'patch'].any? {|segment| args.include?(segment)}
     STDERR.puts('Expecting a single argument: major, minor or patch.')
@@ -22,7 +25,7 @@ end
 desc('Increment the version of your NPM package.')
 command :npm do |cmd|
   cmd.action do |global_options, options, args|
-    npm = Incr::Command::Npm.new(args)
+    npm = Incr::Command::Npm.new(args, global_options)
     npm.execute
   end
 end

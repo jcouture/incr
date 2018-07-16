@@ -4,15 +4,18 @@ require 'sem_version'
 module Incr
   module Command
     class Npm
-      PACKAGE_JSON_FILENAME = 'package.json'.freeze
-      PACKAGE_LOCK_JSON_FILENAME = 'package-lock.json'.freeze
 
-      def initialize(args)
+      def initialize(args, global_options)
         @segment = args[0]
+
+        @packageJsonFilename = File.join(".", global_options[:versionFileDirectory], 'package.json')
+        @packageJsonLockFilename = File.join(".", global_options[:versionFileDirectory], 'package-lock.json')
+        @tagPattern = global_options[:tagNamePattern]
       end
 
       def execute
-        package_json = parse_content(PACKAGE_JSON_FILENAME)
+
+        package_json = parse_content(@packageJsonFilename)
         if package_json == nil
           return
         end
@@ -21,16 +24,19 @@ module Incr
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
 
-        Incr::Service::FileHelper.replace_once(PACKAGE_JSON_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
-        Incr::Service::FileHelper.replace_once(PACKAGE_LOCK_JSON_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(@packageJsonFilename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(@packageJsonLockFilename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
 
-        puts "v#{new_version.to_s}"
+        newTag = @tagPattern % new_version.to_s
+
+        puts newTag
 
         repository = Incr::Service::Repository.new('.')
-        repository.add(PACKAGE_JSON_FILENAME)
-        repository.add(PACKAGE_LOCK_JSON_FILENAME)
-        repository.commit(new_version.to_s)
-        repository.tag("v#{new_version.to_s}")
+        repository.add(@packageJsonFilename)
+        repository.add(@packageJsonLockFilename)
+        repository.commit(newTag)
+
+        repository.tag(newTag)
       end
 
       private
