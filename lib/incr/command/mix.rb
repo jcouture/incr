@@ -3,12 +3,12 @@ module Incr
     class Mix
       def initialize(args, global_options)
         @segment = args[0]
-        @mixFileFilename = File.join(".", global_options[:versionFileDirectory], 'mix.exs')
-        @tagPattern = global_options[:tagNamePattern]
+        @mix_file_filename = File.join('.', global_options[:versionFileDirectory], 'mix.exs')
+        @tag_pattern = global_options[:tagNamePattern]
       end
 
       def execute
-        file_content = parse_content(@mixFileFilename)
+        file_content = parse_content(@mix_file_filename)
         if file_content == nil
           return
         end
@@ -16,16 +16,16 @@ module Incr
         file_version = file_content.match(/version:\W*\"(\d*.\d*.\d*)",/)[1]
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
-        Incr::Service::FileHelper.replace_once(@mixFileFilename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(@mix_file_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
 
-        newTag = @tagPattern % new_version.to_s
+        new_tag = @tag_pattern % new_version.to_s
 
-        puts newTag
+        puts new_tag
 
         repository = Incr::Service::Repository.new('.')
-        repository.add(@mixFileFilename)
-        repository.commit(newTag)
-        repository.tag(newTag)
+        repository.add(@mix_file_filename)
+        repository.commit(new_tag)
+        repository.tag(new_tag)
       end
 
       private
