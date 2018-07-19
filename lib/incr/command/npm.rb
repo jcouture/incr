@@ -4,15 +4,17 @@ require 'sem_version'
 module Incr
   module Command
     class Npm
-      PACKAGE_JSON_FILENAME = 'package.json'.freeze
-      PACKAGE_LOCK_JSON_FILENAME = 'package-lock.json'.freeze
 
-      def initialize(args)
+      def initialize(args, global_options)
         @segment = args[0]
+
+        @package_json_filename = File.join('.', global_options[:versionFileDirectory], 'package.json')
+        @package_json_lock_filename = File.join('.', global_options[:versionFileDirectory], 'package-lock.json')
+        @tag_pattern = global_options[:tagNamePattern]
       end
 
       def execute
-        package_json = parse_content(PACKAGE_JSON_FILENAME)
+        package_json = parse_content(@package_json_filename)
         if package_json == nil
           return
         end
@@ -21,16 +23,18 @@ module Incr
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
 
-        Incr::Service::FileHelper.replace_once(PACKAGE_JSON_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
-        Incr::Service::FileHelper.replace_once(PACKAGE_LOCK_JSON_FILENAME, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(@package_json_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        Incr::Service::FileHelper.replace_once(@package_json_lock_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
 
-        puts "v#{new_version.to_s}"
+        new_tag = @tag_pattern % new_version.to_s
+
+        puts new_tag
 
         repository = Incr::Service::Repository.new('.')
-        repository.add(PACKAGE_JSON_FILENAME)
-        repository.add(PACKAGE_LOCK_JSON_FILENAME)
-        repository.commit(new_version.to_s)
-        repository.tag("v#{new_version.to_s}")
+        repository.add(@package_json_filename)
+        repository.add(@package_json_lock_filename)
+        repository.commit(new_tag)
+        repository.tag(new_tag)
       end
 
       private
