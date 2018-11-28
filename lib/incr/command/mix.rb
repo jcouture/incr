@@ -5,6 +5,8 @@ module Incr
         @segment = args[0]
         @mix_file_filename = File.join('.', global_options[:versionFileDirectory], 'mix.exs')
         @tag_pattern = global_options[:tagNamePattern]
+        @commit = global_options[:commit]
+        @tag = global_options[:tag]
       end
 
       def execute
@@ -24,8 +26,8 @@ module Incr
 
         repository = Incr::Service::Repository.new('.')
         repository.add(@mix_file_filename)
-        repository.commit(new_tag)
-        repository.tag(new_tag)
+        repository.commit(new_tag) if @commit
+        repository.tag(new_tag) if @tag
       end
 
       private
