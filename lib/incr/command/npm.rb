@@ -11,6 +11,8 @@ module Incr
         @package_json_filename = File.join('.', global_options[:versionFileDirectory], 'package.json')
         @package_json_lock_filename = File.join('.', global_options[:versionFileDirectory], 'package-lock.json')
         @tag_pattern = global_options[:tagNamePattern]
+        @commit = global_options[:commit]
+        @tag = global_options[:tag]
       end
 
       def execute
@@ -33,8 +35,8 @@ module Incr
         repository = Incr::Service::Repository.new('.')
         repository.add(@package_json_filename)
         repository.add(@package_json_lock_filename)
-        repository.commit(new_tag)
-        repository.tag(new_tag)
+        repository.commit(new_tag) if @commit
+        repository.tag(new_tag) if @tag
       end
 
       private

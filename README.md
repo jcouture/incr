@@ -46,16 +46,18 @@ To increment the minor segment of your Mix package version number:
 Here are some arguments that can be used with `incr`:
 - `-d` : Directory where to search for the version files (default: `.`)
 - `-t` : Tag name pattern, where `%s` will be replaced with the new version (default: `v%s`)
+- `--[no-]commit` : Commit changes. (default: enabled)
+- `--[no-]tag` : Create a git tag. (default: enabled)
 
 Example:
 ```shell
-~> incr npm patch -d ./subprojects/web/ -t MyCustomTagPrefix/%s
+~> incr --no-tag npm patch -d ./subprojects/web/ -t MyCustomTagPrefix/%s
 ```
 
 This will :
 - Search for `package.json` and `package-lock.json` files inside `./subprojects/web/` and update the patch version
-- Create a tag named `MyCustomTagPrefix/2.3.4`
 - Commit the changes under the message `MyCustomTagPrefix/2.3.4`
+- Not create a tag with the new version
 
 ## Contributing
 
