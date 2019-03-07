@@ -1,6 +1,12 @@
 module Incr
   module Command
     class Mix
+      VERSION_REGEX = /@?version:?\W*\"(\d*.\d*.\d*)"/
+      VERSION_REPLACEMENT_PATTERNS = [
+        "version: \"%s\"",
+        "@version \"%s\""
+      ]
+
       def initialize(args, global_options)
         @segment = args[0]
         @mix_file_filename = File.join('.', global_options[:versionFileDirectory], 'mix.exs')
@@ -15,10 +21,10 @@ module Incr
           return
         end
 
-        file_version = file_content.match(/version:\W*\"(\d*.\d*.\d*)",/)[1]
+        file_version = file_content.match(VERSION_REGEX)[1]
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
-        Incr::Service::FileHelper.replace_once(@mix_file_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        replace_file_version(old_version, new_version)
 
         new_tag = @tag_pattern % new_version.to_s
 
@@ -41,8 +47,13 @@ module Incr
         IO.read(filename)
       end
 
-      def version_pattern(version)
-        "version: \"#{version}\""
+      def replace_file_version(old_version, new_version)
+        VERSION_REPLACEMENT_PATTERNS.each do |pattern|
+          old_version_pattern = format(pattern, old_version.to_s)
+          new_version_pattern = format(pattern, new_version.to_s)
+
+          Incr::Service::FileHelper.replace_once(@mix_file_filename, old_version_pattern, new_version_pattern)
+        end
       end
     end
   end
