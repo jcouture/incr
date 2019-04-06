@@ -6,8 +6,7 @@
   Incr is a tool to help you easily increment the version number of your NPM or Mix packages.
   <br /><br />
   <a href="https://rubygems.org/gems/incr"><img src="http://img.shields.io/gem/v/incr.svg" /></a>
-  <a href="https://codeclimate.com/github/jcouture/incr"><img src="http://img.shields.io/codeclimate/github/jcouture/incr.svg" /></a>
-  <a href="https://gemnasium.com/jcouture/incr"><img src="http://img.shields.io/gemnasium/jcouture/incr.svg" /></a>
+
   <a href="https://travis-ci.org/jcouture/incr"><img src="http://img.shields.io/travis/jcouture/incr.svg" /></a>
 </p>
 
