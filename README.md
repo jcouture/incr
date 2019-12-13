@@ -50,7 +50,7 @@ Here are some arguments that can be used with `incr`:
 
 Example:
 ```shell
-~> incr --no-tag npm patch -d ./subprojects/web/ -t MyCustomTagPrefix/%s
+~> incr --no-tag -d ./subprojects/web/ -t MyCustomTagPrefix/%s npm patch
 ```
 
 This will :
