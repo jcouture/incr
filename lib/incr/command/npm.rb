@@ -4,6 +4,14 @@ require 'sem_version'
 module Incr
   module Command
     class Npm
+      # pattern for any semver version, including pre-release label (ie. 1.0.0-alpha)
+      VERSION_PATTERN = "[\\w\\.\\-]*"
+
+      # pattern preceding the version in package.json and package-lock.json (v1 and v2)
+      LOOKBEHIND_PATTERNS = [
+        "\\A{[^{}]*\"version\": \"\\K",
+        "\"\": {[^{}]*\"version\": \"\\K"
+      ]
 
       def initialize(args, global_options)
         @segment = args[0]
@@ -25,8 +33,8 @@ module Incr
         old_version = SemVersion.new(file_version)
         new_version = Incr::Service::Version.increment_segment(old_version, @segment)
 
-        Incr::Service::FileHelper.replace_once(@package_json_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
-        Incr::Service::FileHelper.replace_once(@package_json_lock_filename, version_pattern(old_version.to_s), version_pattern(new_version.to_s))
+        replace_file_version(@package_json_filename, new_version.to_s)
+        replace_file_version(@package_json_lock_filename, new_version.to_s)
 
         new_tag = @tag_pattern % new_version.to_s
 
@@ -50,8 +58,11 @@ module Incr
         JSON.parse(IO.read(filename))
       end
 
-      def version_pattern(version)
-        "\"version\": \"#{version}\""
+      def replace_file_version(filename, new_version)
+        LOOKBEHIND_PATTERNS.each do |lookbehind_pattern|
+          pattern = /#{lookbehind_pattern}#{VERSION_PATTERN}/
+          Incr::Service::FileHelper.replace_regexp_once(filename, pattern, new_version)
+        end
       end
     end
   end
