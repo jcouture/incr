@@ -52,7 +52,7 @@ module Incr
           old_version_pattern = format(pattern, old_version.to_s)
           new_version_pattern = format(pattern, new_version.to_s)
 
-          Incr::Service::FileHelper.replace_once(@mix_file_filename, old_version_pattern, new_version_pattern)
+          Incr::Service::FileHelper.replace_string_once(@mix_file_filename, old_version_pattern, new_version_pattern)
         end
       end
     end
