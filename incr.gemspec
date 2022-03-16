@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.executables << 'incr'
   spec.require_paths << 'lib'
 
-  spec.add_runtime_dependency('gli', '2.17.1')
+  spec.add_runtime_dependency('gli', '2.21.0')
   spec.add_runtime_dependency('sem_version', '2.0.1')
-  spec.add_runtime_dependency('git', '1.3.0')
+  spec.add_runtime_dependency('git', '1.10.2')
 end

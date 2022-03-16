@@ -2,15 +2,17 @@ PATH
   remote: .
   specs:
     incr (0.7.1)
-      git (= 1.3.0)
-      gli (= 2.17.1)
+      git (= 1.10.2)
+      gli (= 2.21.0)
       sem_version (= 2.0.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    git (1.3.0)
-    gli (2.17.1)
+    git (1.10.2)
+      rchardet (~> 1.8)
+    gli (2.21.0)
+    rchardet (1.8.0)
     sem_version (2.0.1)
 
 PLATFORMS
