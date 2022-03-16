@@ -2,7 +2,7 @@ module Incr
   module Service
     class FileHelper
       def self.replace_string_once(filename, old_text, new_text)
-        replace_regexp_once(/#{Regexp.escape(old_text)}/, new_text)
+        replace_regexp_once(filename, /#{Regexp.escape(old_text)}/, new_text)
       end
 
       def self.replace_regexp_once(filename, pattern, replacement_text)
