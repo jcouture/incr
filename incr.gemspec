@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.executables << 'incr'
   spec.require_paths << 'lib'
 
+  spec.required_ruby_version = '>= 2.7'
+
   spec.add_runtime_dependency('gli', '2.21.0')
   spec.add_runtime_dependency('sem_version', '2.0.1')
   spec.add_runtime_dependency('git', '1.10.2')
