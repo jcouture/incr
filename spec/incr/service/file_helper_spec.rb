@@ -23,7 +23,7 @@ describe Incr::Service::FileHelper do
               Incr::Service::FileHelper.replace_string_once(filename, 'World', 'Friend')
               result = read_file(filename)
 
-              expect(expected).to eql(result)
+              expect(result).to eql(expected)
             end
         end
 
@@ -44,7 +44,7 @@ describe Incr::Service::FileHelper do
             Incr::Service::FileHelper.replace_string_once(filename, '7.0.0', '7.0.1')
             result = read_file(filename)
             
-            expect(expected).to eql(result)
+            expect(result).to eql(expected)
           end
         end
 
@@ -59,7 +59,7 @@ describe Incr::Service::FileHelper do
             Incr::Service::FileHelper.replace_string_once(filename, '7.0.0', '7.0.1')
             result = read_file(filename)
 
-            expect(expected).to eql(result)
+            expect(result).to eql(expected)
           end
         end
     end
@@ -76,7 +76,7 @@ describe Incr::Service::FileHelper do
           Incr::Service::FileHelper.replace_regexp_once(filename, /^Hel{2}o/, 'Buongiorno')
           result = read_file(filename)
 
-          expect(expected).to eql(result)
+          expect(result).to eql(expected)
         end
       end
       
@@ -103,7 +103,7 @@ describe Incr::Service::FileHelper do
           Incr::Service::FileHelper.replace_regexp_once(filename, /7.0.0/, '7.0.1')
           result = read_file(filename)
 
-          expect(expected).to eql(result)
+          expect(result).to eql(expected)
         end
       end
 
@@ -118,7 +118,7 @@ describe Incr::Service::FileHelper do
           Incr::Service::FileHelper.replace_regexp_once(filename, /7.0.0/, '7.0.1')
           result = read_file(filename)
 
-          expect(expected).to eql(result)
+          expect(result).to eql(expected)
         end
       end
     end

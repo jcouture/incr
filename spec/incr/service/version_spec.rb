@@ -11,21 +11,21 @@ describe Incr::Service::Version do
         expected = '2.0.0'
         result = Incr::Service::Version.increment_segment(version, 'major')
 
-        expect(expected).to eql(result.to_s)
+        expect(result.to_s).to eql(expected)
       end
 
       it 'should increment the minor segment' do
         expected = '1.1.0'
         result = Incr::Service::Version.increment_segment(version, 'minor')
 
-        expect(expected).to eql(result.to_s)
+        expect(result.to_s).to eql(expected)
       end
 
       it 'should increment the patch segment' do
         expected = '1.0.1'
         result = Incr::Service::Version.increment_segment(version, 'patch')
 
-        expect(expected).to eql(result.to_s)
+        expect(result.to_s).to eql(expected)
       end
     end
 
@@ -46,7 +46,7 @@ describe Incr::Service::Version do
         expected = '1.0.0'
         result = Incr::Service::Version.increment_segment(version, 'foobar')
 
-        expect(expected).to eql(result.to_s)
+        expect(result.to_s).to eql(expected)
       end
     end
   end
