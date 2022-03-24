@@ -1,6 +1,7 @@
 require 'incr'
 
 require 'tempfile'
+require 'fileutils'
 
 def create_tempfile(content)
   file = Tempfile.new('incr')
@@ -9,6 +10,12 @@ def create_tempfile(content)
   file.close()
 
   file.path
+end
+
+def copy_files(dir, *filenames)
+  filenames.each do |filename|
+    FileUtils.cp(filename, dir)
+  end
 end
 
 def read_file(filename)
