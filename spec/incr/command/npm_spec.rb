@@ -4,11 +4,7 @@ describe Incr::Command::Npm do
   let(:args) do
     ['major']
   end
-
-  let(:command) do
-    Incr::Command::Npm.new(args, global_options)
-  end
-
+  
   describe '#execute' do
     context 'with NPM v6 files' do
       before(:each) do
