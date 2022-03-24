@@ -21,6 +21,7 @@ module Incr
         @tag_pattern = global_options[:tagNamePattern]
         @commit = global_options[:commit]
         @tag = global_options[:tag]
+        @noop = global_options[:noop]
       end
 
       def execute
@@ -40,11 +41,13 @@ module Incr
 
         puts new_tag
 
-        repository = Incr::Service::Repository.new('.')
-        repository.add(@package_json_filename)
-        repository.add(@package_json_lock_filename)
-        repository.commit(new_tag) if @commit
-        repository.tag(new_tag) if @tag
+        if not @noop
+          repository = Incr::Service::Repository.new('.')
+          repository.add(@package_json_filename)
+          repository.add(@package_json_lock_filename)
+          repository.commit(new_tag) if @commit
+          repository.tag(new_tag) if @tag
+        end
       end
 
       private
