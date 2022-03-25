@@ -25,7 +25,17 @@ module Incr
       end
 
       def execute
-        package_json = parse_content(@package_json_filename)
+        if !File.exist?(@package_json_filename)
+          warn("'#{@package_json_filename}': file not found.")
+          return
+        end
+
+        if !File.exist?(@package_json_lock_filename)
+          warn("'#{@package_json_lock_filename}': file not found.")
+          return
+        end
+
+        package_json = JSON.parse(IO.read(@package_json_filename))
         if package_json == nil
           return
         end
@@ -51,15 +61,6 @@ module Incr
       end
 
       private
-
-      def parse_content(filename)
-        if !File.exist?(filename)
-          STDERR.puts("[Err] '#{filename}' not found.")
-          return nil
-        end
-
-        JSON.parse(IO.read(filename))
-      end
 
       def replace_file_version(filename, new_version)
         LOOKBEHIND_PATTERNS.each do |lookbehind_pattern|

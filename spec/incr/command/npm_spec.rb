@@ -50,7 +50,7 @@ describe Incr::Command::Npm do
 }
 )
         npm = Incr::Command::Npm.new(args, global_options)
-        npm.execute()
+        expect{ npm.execute() }.to output("v8.0.0\n").to_stdout
 
         result = read_file(File.join(@tmpdir, 'package.json'))
         expect(result).to eql(expected)
@@ -125,13 +125,68 @@ describe Incr::Command::Npm do
 }
 )
         npm = Incr::Command::Npm.new(args, global_options)
-        npm.execute()
+        expect{ npm.execute() }.to output("v8.0.0\n").to_stdout
 
         result = read_file(File.join(@tmpdir, 'package.json'))
         expect(result).to eql(expected)
 
         lockfile_result = read_file(File.join(@tmpdir, 'package-lock.json'))
         expect(lockfile_expected).to eql(lockfile_result)
+      end
+
+      after(:each) do
+        FileUtils.remove_entry_secure(@tmpdir)
+      end
+    end
+
+    context 'without expected files' do
+      before(:each) do
+        @tmpdir = Dir.mktmpdir('incr', '.')
+      end
+
+      let(:global_options) do
+        {
+          commit: false,
+          tag: false,
+          noop: true,
+          versionFileDirectory: @tmpdir,
+          tagNamePattern: 'v%s'
+        }
+      end
+
+      it 'should return an error' do
+        npm = Incr::Command::Npm.new(args, global_options)
+        expected = "'#{File.join('.', @tmpdir, 'package.json')}': file not found.\n"
+        expect { npm.execute() }.to output(expected).to_stderr
+      end
+
+      after(:each) do
+        FileUtils.remove_entry_secure(@tmpdir)
+      end
+    end
+
+    context 'without expected lock file' do
+      before(:each) do
+        @tmpdir = Dir.mktmpdir('incr', '.')
+      end
+
+      let(:global_options) do
+        {
+          commit: false,
+          tag: false,
+          noop: true,
+          versionFileDirectory: @tmpdir,
+          tagNamePattern: 'v%s'
+        }
+      end
+
+      let(:npmv6_package_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv6/package.json" }
+
+      it 'should return an error ' do
+        copy_files(@tmpdir, npmv6_package_filename)
+        npm = Incr::Command::Npm.new(args, global_options)
+        expected = "'#{File.join('.', @tmpdir, 'package-lock.json')}': file not found.\n"
+        expect { npm.execute() }.to output(expected).to_stderr
       end
 
       after(:each) do
