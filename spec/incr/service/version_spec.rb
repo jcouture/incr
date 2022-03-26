@@ -5,24 +5,24 @@ require 'sem_version'
 describe Incr::Service::Version do
   describe '.increment_segment' do
     context 'with a SemVersion object' do
-      let(:version) { SemVersion.new('1.0.0') }
+      let(:version) { SemVersion.new('1.2.4') }
 
-      it 'should increment the major segment' do
+      it 'should increment the major segment and reset the minor and patch segments' do
         expected = '2.0.0'
         result = Incr::Service::Version.increment_segment(version, 'major')
 
         expect(result.to_s).to eql(expected)
       end
 
-      it 'should increment the minor segment' do
-        expected = '1.1.0'
+      it 'should increment the minor segment and reset the patch segment' do
+        expected = '1.3.0'
         result = Incr::Service::Version.increment_segment(version, 'minor')
 
         expect(result.to_s).to eql(expected)
       end
 
       it 'should increment the patch segment' do
-        expected = '1.0.1'
+        expected = '1.2.5'
         result = Incr::Service::Version.increment_segment(version, 'patch')
 
         expect(result.to_s).to eql(expected)
