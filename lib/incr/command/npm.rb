@@ -16,9 +16,9 @@ module Incr
       def initialize(args, global_options)
         @segment = args[0]
 
-        @package_json_filename = File.join('.', global_options[:versionFileDirectory], 'package.json')
-        @package_json_lock_filename = File.join('.', global_options[:versionFileDirectory], 'package-lock.json')
-        @tag_pattern = global_options[:tagNamePattern]
+        @package_json_filename = File.join('.', global_options[:version_file_dir], 'package.json')
+        @package_json_lock_filename = File.join('.', global_options[:version_file_dir], 'package-lock.json')
+        @tag_pattern = global_options[:tag_name_pattern]
         @commit = global_options[:commit]
         @tag = global_options[:tag]
         @noop = global_options[:noop]

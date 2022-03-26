@@ -16,8 +16,8 @@ describe Incr::Command::Mix do
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 
@@ -78,8 +78,8 @@ end
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 

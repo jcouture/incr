@@ -16,8 +16,8 @@ describe Incr::Command::Npm do
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 
@@ -74,8 +74,8 @@ describe Incr::Command::Npm do
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 
@@ -149,8 +149,8 @@ describe Incr::Command::Npm do
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 
@@ -175,8 +175,8 @@ describe Incr::Command::Npm do
           commit: false,
           tag: false,
           noop: true,
-          versionFileDirectory: @tmpdir,
-          tagNamePattern: 'v%s'
+          version_file_dir: @tmpdir,
+          tag_name_pattern: 'v%s'
         }
       end
 

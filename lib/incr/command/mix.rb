@@ -9,8 +9,8 @@ module Incr
 
       def initialize(args, global_options)
         @segment = args[0]
-        @mix_file_filename = File.join('.', global_options[:versionFileDirectory], 'mix.exs')
-        @tag_pattern = global_options[:tagNamePattern]
+        @mix_file_filename = File.join('.', global_options[:version_file_dir], 'mix.exs')
+        @tag_pattern = global_options[:tag_name_pattern]
         @commit = global_options[:commit]
         @tag = global_options[:tag]
         @noop = global_options[:noop]
