@@ -17,7 +17,12 @@ module Incr
       end
 
       def execute
-        file_content = parse_content(@mix_file_filename)
+        if !File.exist?(@mix_file_filename)
+          warn("'#{@mix_file_filename}': file not found.")
+          return
+        end
+
+        file_content = IO.read(@mix_file_filename)
         if file_content == nil
           return
         end
@@ -40,15 +45,6 @@ module Incr
       end
 
       private
-
-      def parse_content(filename)
-        if !File.exist?(filename)
-          STDERR.puts("[Err] '#{filename}' not found.")
-          return nil
-        end
-
-        IO.read(filename)
-      end
 
       def replace_file_version(old_version, new_version)
         VERSION_REPLACEMENT_PATTERNS.each do |pattern|
