@@ -65,7 +65,7 @@ module Incr
       def replace_file_version(filename, new_version)
         LOOKBEHIND_PATTERNS.each do |lookbehind_pattern|
           pattern = /#{lookbehind_pattern}#{VERSION_PATTERN}/
-          Incr::Service::FileHelper.replace_regexp_once(filename, pattern, new_version)
+          Incr::Service::FileHelper.replace(filename, pattern, new_version)
         end
       end
     end
