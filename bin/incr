@@ -10,11 +10,11 @@ include GLI::App
 program_desc('Tasteful utility to increment the version number and create a corresponding git tag.')
 version(Incr::VERSION)
 
-flag [:d, :version_file_dir], :default_value => '.', :desc => 'Directory where to search for version file'
-flag [:t, :tag_name_pattern], :default_value => 'v%s', :desc => 'Pattern for the tag name'
+flag([:d, :version_file_dir], default_value: '.', desc: 'Directory where to search for version file')
+flag([:t, :tag_name_pattern], default_value: 'v%s', desc: 'Pattern for the tag name')
 
-switch :commit, :default_value => true, :desc => 'Commit changes'
-switch :tag, :default_value => true, :desc => 'Create a git tag'
+switch(:commit, default_value: true, desc: 'Commit changes')
+switch(:tag, default_value: true, desc: 'Create a git tag')
 
 pre do |global, command, options, args|
   if args.length != 1 || !['major', 'minor', 'patch'].any? {|segment| args.include?(segment)}
