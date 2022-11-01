@@ -24,6 +24,7 @@ GEM
       ast (~> 2.4.1)
     public_suffix (5.0.0)
     rainbow (3.1.1)
+    rake (13.0.6)
     rchardet (1.8.0)
     regexp_parser (2.6.0)
     rexml (3.2.5)
@@ -36,7 +37,7 @@ GEM
     rspec-expectations (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-mocks (3.11.1)
+    rspec-mocks (3.11.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-support (3.11.1)
@@ -61,6 +62,7 @@ PLATFORMS
 DEPENDENCIES
   incr!
   meowcop (= 3.1)
+  rake (= 13.0.6)
   rspec (= 3.11.0)
   rubocop (= 1.26.0)
 
