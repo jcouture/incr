@@ -16,7 +16,7 @@ module Incr
       end
 
       def tag(name)
-        @git.add_tag(name)
+        @git.add_tag(name, annotate: true, message: name)
       end
     end
   end
