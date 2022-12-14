@@ -19,7 +19,7 @@ The process is detailed as follow:
 * Increment the specified segment. If you increment the minor segment, the patch segment is set to 0 and the same goes for the major segment, the minor and patch segments are set to 0.
 * Write the newly incremented version number in the relevant file(s).
 * Create a new `git commit` with the relevant file with the version number as the default message (e.g.: 0.2.1).
-* Create a new `git tag` pointing to the new `git commit` with the version number prefixed by a 'v' as the name (e.g.: v0.2.1).
+* Create a new annotated `git tag` pointing to the new `git commit` with the version number prefixed by a 'v' as the name (e.g.: v0.2.1).
 * 💥
 
 ## Installation
