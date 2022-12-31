@@ -1,0 +1,39 @@
+name: Publish RubyGem
+
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+        bundler-cache: true
+    
+    - run: bundle exec rake
+
+  publish:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+        bundler-cache: true
+
+    - run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+        gem build *.gemspec
+        gem push *.gem
+      env:
+        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
