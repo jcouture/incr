@@ -16,15 +16,26 @@ module Incr
       def initialize(args, global_options)
         @segment = args[0]
 
-        @package_json_filename = File.join('.', global_options[:versionFileDirectory], 'package.json')
-        @package_json_lock_filename = File.join('.', global_options[:versionFileDirectory], 'package-lock.json')
-        @tag_pattern = global_options[:tagNamePattern]
+        @package_json_filename = File.join('.', global_options[:version_file_dir], 'package.json')
+        @package_json_lock_filename = File.join('.', global_options[:version_file_dir], 'package-lock.json')
+        @tag_pattern = global_options[:tag_name_pattern]
         @commit = global_options[:commit]
         @tag = global_options[:tag]
+        @noop = global_options[:noop]
       end
 
       def execute
-        package_json = parse_content(@package_json_filename)
+        if !File.exist?(@package_json_filename)
+          warn("'#{@package_json_filename}': file not found.")
+          return
+        end
+
+        if !File.exist?(@package_json_lock_filename)
+          warn("'#{@package_json_lock_filename}': file not found.")
+          return
+        end
+
+        package_json = JSON.parse(IO.read(@package_json_filename))
         if package_json == nil
           return
         end
@@ -40,28 +51,21 @@ module Incr
 
         puts new_tag
 
-        repository = Incr::Service::Repository.new('.')
-        repository.add(@package_json_filename)
-        repository.add(@package_json_lock_filename)
-        repository.commit(new_tag) if @commit
-        repository.tag(new_tag) if @tag
+        if not @noop
+          repository = Incr::Service::Repository.new('.')
+          repository.add(@package_json_filename)
+          repository.add(@package_json_lock_filename)
+          repository.commit(new_tag) if @commit
+          repository.tag(new_tag) if @tag
+        end
       end
 
       private
 
-      def parse_content(filename)
-        if !File.exist?(filename)
-          STDERR.puts("[Err] '#{filename}' not found.")
-          return nil
-        end
-
-        JSON.parse(IO.read(filename))
-      end
-
       def replace_file_version(filename, new_version)
         LOOKBEHIND_PATTERNS.each do |lookbehind_pattern|
           pattern = /#{lookbehind_pattern}#{VERSION_PATTERN}/
-          Incr::Service::FileHelper.replace_regexp_once(filename, pattern, new_version)
+          Incr::Service::FileHelper.replace(filename, pattern, new_version)
         end
       end
     end

@@ -1,0 +1,8 @@
+# To use the MeowCop gem.
+inherit_gem:
+  meowcop:
+    - config/rubocop.yml
+  
+AllCops:
+  NewCops: disable
+  SuggestExtensions: false

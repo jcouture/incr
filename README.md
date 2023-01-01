@@ -1,13 +1,11 @@
 <p align="center">
   <a href="https://github.com/jcouture/incr">
-    <img src="https://i.imgur.com/cHimJRm.png" alt="incr" />
+    <img src="https://user-images.githubusercontent.com/5007/160249855-dc0eb32f-f77d-4c5a-a995-93ac46408a68.png" alt="incr" />
   </a>
   <br />
-  Incr is a tool to help you easily increment the version number of your NPM or Mix packages.
+  incr is a tool to help you easily increment the version number of your NPM or Mix packages.
   <br /><br />
   <a href="https://rubygems.org/gems/incr"><img src="http://img.shields.io/gem/v/incr.svg" /></a>
-
-  <a href="https://travis-ci.org/jcouture/incr"><img src="http://img.shields.io/travis/jcouture/incr.svg" /></a>
 </p>
 
 ## What does `incr` do?
@@ -31,31 +29,38 @@ The process is detailed as follow:
 ```
 
 ## Usage
+
 To increment the patch segment of your NPM package version number:
+
 ```shell
 ~> incr npm patch
 ```
 
 To increment the minor segment of your Mix package version number:
+
 ```shell
 ~> incr mix minor
 ```
 
 ### Arguments
+
 Here are some arguments that can be used with `incr`:
+
 - `-d` : Directory where to search for the version files (default: `.`)
 - `-t` : Tag name pattern, where `%s` will be replaced with the new version (default: `v%s`)
 - `--[no-]commit` : Commit changes. (default: enabled)
 - `--[no-]tag` : Create a git tag. (default: enabled)
 
 Example:
+
 ```shell
-~> incr --no-tag -d ./subprojects/web/ -t MyCustomTagPrefix/%s npm patch
+~> incr --no-tag -d ./subprojects/web/ -t my-custom-tag-prefix/%s npm patch
 ```
 
 This will :
+
 - Search for `package.json` and `package-lock.json` files inside `./subprojects/web/` and update the patch version
-- Commit the changes under the message `MyCustomTagPrefix/2.3.4`
+- Commit the changes under the message `my-custom-tag-prefix/2.3.4`
 - Not create a tag with the new version
 
 ## Contributing
@@ -65,5 +70,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/jcoutu
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-The incr shield logo is based on [this icon](https://thenounproject.com/term/increment/621415/) by [blackspike](https://thenounproject.com/blackspike/), from the Noun Project. Used under a [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/) license.
