@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.2'
 
-  spec.add_runtime_dependency('gli', '2.21.0')
+  spec.add_runtime_dependency('gli', '2.21.1')
   spec.add_runtime_dependency('sem_version', '2.0.1')
   spec.add_runtime_dependency('git', '1.18.0')
 
