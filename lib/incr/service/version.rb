@@ -16,6 +16,8 @@ module Incr
           incremented_version.patch = 0
         when 'patch'
           incremented_version.patch = version.patch + 1
+        else
+          raise ArgumentError, "Unknown segment: #{segment}"
         end
 
         incremented_version

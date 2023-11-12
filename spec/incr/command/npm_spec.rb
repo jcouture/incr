@@ -24,7 +24,7 @@ describe Incr::Command::Npm do
       let(:npmv6_package_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv6/package.json" }
       let(:npmv6_package_lock_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv6/package-lock.json" }
   
-      it 'should increase the version number' do
+      it 'inrements the version number' do
         copy_files(@tmpdir, npmv6_package_filename, npmv6_package_lock_filename)
 
         expected = %({
@@ -82,7 +82,7 @@ describe Incr::Command::Npm do
       let(:npmv7_package_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv7/package.json" }
       let(:npmv7_package_lock_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv7/package-lock.json" }
 
-      it 'should increase the version number' do
+      it 'increments the version number' do
         copy_files(@tmpdir, npmv7_package_filename, npmv7_package_lock_filename)
 
         expected = %({
@@ -154,7 +154,7 @@ describe Incr::Command::Npm do
         }
       end
 
-      it 'should return an error' do
+      it 'returns an error' do
         npm = Incr::Command::Npm.new(args, global_options)
         expected = "'#{File.join('.', @tmpdir, 'package.json')}': file not found.\n"
         expect { npm.execute() }.to output(expected).to_stderr
@@ -182,7 +182,7 @@ describe Incr::Command::Npm do
 
       let(:npmv6_package_filename) { "#{File.dirname(__FILE__)}/../../fixtures/npmv6/package.json" }
 
-      it 'should return an error ' do
+      it 'returns an error ' do
         copy_files(@tmpdir, npmv6_package_filename)
         npm = Incr::Command::Npm.new(args, global_options)
         expected = "'#{File.join('.', @tmpdir, 'package-lock.json')}': file not found.\n"

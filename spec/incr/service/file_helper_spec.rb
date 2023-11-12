@@ -17,7 +17,7 @@ describe Incr::Service::FileHelper do
           create_tempfile(SIMPLE_FILE_CONTENT)
         end
 
-        it 'should replace specified regular expression' do
+        it 'replaces specified regular expression' do
           expected = "Buongiorno, World!"
 
           Incr::Service::FileHelper.replace(filename, /^Hel{2}o/, 'Buongiorno')
@@ -38,7 +38,7 @@ describe Incr::Service::FileHelper do
           create_tempfile(JSON_FILE_CONTENT)
         end
 
-        it 'should replace specified regular expression, once' do
+        it 'replaces specified regular expression, once' do
           expected = %({
   "name": "incr",
   "version": "7.0.1",
@@ -59,7 +59,7 @@ describe Incr::Service::FileHelper do
           create_tempfile(SIMPLE_FILE_CONTENT)
         end
 
-        it 'should not do anything' do
+        it 'does not do anything' do
           expected = "Hello, World!"
 
           Incr::Service::FileHelper.replace(filename, /7.0.0/, '7.0.1')

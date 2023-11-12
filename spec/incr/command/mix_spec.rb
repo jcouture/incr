@@ -22,7 +22,7 @@ describe Incr::Command::Mix do
       end
 
       let(:mix_filename) { "#{File.dirname(__FILE__)}/../../fixtures/mix/mix.exs" }
-      it 'should increase the version number' do
+      it 'increments the version number' do
         copy_files(@tmpdir, mix_filename)
 
         expected = %+defmodule Foobar.MixProject do
@@ -83,7 +83,7 @@ end
         }
       end
 
-      it 'should return an error' do
+      it 'returns an error' do
         mix = Incr::Command::Mix.new(args, global_options)
         expected = "'#{File.join('.', @tmpdir, 'mix.exs')}': file not found.\n"
         expect { mix.execute() }.to output(expected).to_stderr
