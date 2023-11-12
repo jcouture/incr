@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     branches:
-      - '**'
+      - "**"
 
 permissions:
   contents: read
@@ -16,10 +16,30 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v3
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: .tool-versions
-        bundler-cache: true
-    
-    - run: bundle exec rake
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .tool-versions
+          bundler-cache: true
+
+      - run: bundle exec rake
+
+  scan:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          exit-code: "1"
+          ignore-unfixed: true
+          skip-dirs: spec/fixtures
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results.sarif"
