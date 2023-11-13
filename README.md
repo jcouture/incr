@@ -3,7 +3,7 @@
     <img src="https://user-images.githubusercontent.com/5007/160249855-dc0eb32f-f77d-4c5a-a995-93ac46408a68.png" alt="incr" />
   </a>
   <br />
-  incr is a tool to help you easily increment the version number of your NPM or Mix packages.
+  incr is designed to streamline the process of incrementing the version number of your NPM or Mix packages.
   <br /><br />
   <a href="https://rubygems.org/gems/incr"><img src="http://img.shields.io/gem/v/incr.svg" /></a>
 </p>
@@ -12,13 +12,13 @@
 
 The process is detailed as follow:
 
-*  Find the relevant file(s) (e.g.: `package.json` and `package-lock.json` or `mix.exs`).
-* Determine the existing version number.
-* Increment the specified segment. If you increment the minor segment, the patch segment is set to 0 and the same goes for the major segment, the minor and patch segments are set to 0.
-* Write the newly incremented version number in the relevant file(s).
-* Create a new `git commit` with the relevant file with the version number as the default message (e.g.: 0.2.1).
-* Create a new annotated `git tag` pointing to the new `git commit` with the version number prefixed by a 'v' as the name (e.g.: v0.2.1).
-* 💥
+- Find the relevant file(s) (e.g.: `package.json` and `package-lock.json` or `mix.exs`).
+- Determine the existing version number.
+- Increment the specified segment. If you increment the minor segment, the patch segment is set to 0 and the same goes for the major segment, the minor and patch segments are set to 0.
+- Write the newly incremented version number in the relevant file(s).
+- Create a new `git commit` with the relevant file with the version number as the default message (e.g.: 0.2.1).
+- Create a new annotated `git tag` pointing to the new `git commit` with the version number prefixed by a 'v' as the name (e.g.: v0.2.1).
+- 💥
 
 ## Installation
 
@@ -42,12 +42,19 @@ To increment the minor segment of your Mix package version number:
 ~> incr mix minor
 ```
 
+To increment the prerelease segment of your NPM package version number, while specifying an identifier (`rc`):
+
+```shell
+~> incr -i rc mix prerelease
+```
+
 ### Arguments
 
 Here are some arguments that can be used with `incr`:
 
 - `-d` : Directory where to search for the version files (default: `.`)
 - `-t` : Tag name pattern, where `%s` will be replaced with the new version (default: `v%s`)
+- `-i` : Identifier for the prerelease segment (default: `alpha`)
 - `--[no-]commit` : Commit changes. (default: enabled)
 - `--[no-]tag` : Create a git tag. (default: enabled)
 
@@ -57,7 +64,7 @@ Example:
 ~> incr --no-tag -d ./subprojects/web/ -t my-custom-tag-prefix/%s npm patch
 ```
 
-This will :
+This will:
 
 - Search for `package.json` and `package-lock.json` files inside `./subprojects/web/` and update the patch version
 - Commit the changes under the message `my-custom-tag-prefix/2.3.4`
@@ -69,4 +76,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/jcoutu
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+This lovely gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

@@ -40,5 +40,53 @@ describe Incr::Service::Version do
         }.to raise_error(NoMethodError)
       end
     end
+
+    context 'without a prerelease version' do
+      let(:version) { SemVersion.new('1.0.0') }
+
+      it 'increments the prerelease segment' do
+        expected = '1.0.1-alpha.1'
+        result = Incr::Service::Version.increment_segment(version, 'prerelease', 'alpha')
+        expect(result.to_s).to eql(expected)
+      end
+    end
+    
+    context 'with a prerelease version' do
+      let(:version) { SemVersion.new('1.0.0-alpha.1') }
+
+      it 'increments the prerelease segment' do
+        expected = '1.0.0-alpha.2'
+        result = Incr::Service::Version.increment_segment(version, 'prerelease')
+        expect(result.to_s).to eql(expected)
+      end
+
+      it 'increments the prerelease segment with a custom identifier' do
+        expected = '1.0.0-rc.1'
+        result = Incr::Service::Version.increment_segment(version, 'prerelease', 'rc')
+        expect(result.to_s).to eql(expected)
+      end
+
+      it 'increments the prerelease segment with a custom identifier and resets the prerelease segment' do
+        expected = '1.0.0-rc.1'
+        result = Incr::Service::Version.increment_segment(version, 'prerelease', 'rc')
+        expect(result.to_s).to eql(expected)
+      end
+
+      it 'increments the prerelease segment with a custom identifier and resets the prerelease segment' do
+        expected = '1.0.0-rc.1'
+        result = Incr::Service::Version.increment_segment(version, 'prerelease', 'rc')
+        expect(result.to_s).to eql(expected)
+      end
+
+      it 'increments the minor segment' do
+        expected = '1.1.0'
+        result = Incr::Service::Version.increment_segment(version, 'minor')
+        expect(result.to_s).to eql(expected)
+      end
+
+      it 'handles empty custom identifier' do
+        expect { Incr::Service::Version.increment_segment(version, 'prerelease', '') }.to raise_error(ArgumentError)
+      end
+    end
   end
 end
