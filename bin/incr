@@ -12,7 +12,7 @@ version(Incr::VERSION)
 
 flag([:d, :version_file_dir], default_value: '.', desc: 'Directory where to search for version file')
 flag([:t, :tag_name_pattern], default_value: 'v%s', desc: 'Pattern for the tag name')
-flag([:i, :identifier], default_value: nil, desc: 'Identifier for the prerelease segment')
+flag([:i, :identifier], default_value: 'alpha', desc: 'Identifier for the prerelease segment')
 
 switch(:commit, default_value: true, desc: 'Commit changes')
 switch(:tag, default_value: true, desc: 'Create a git tag')
