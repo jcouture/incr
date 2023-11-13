@@ -22,6 +22,7 @@ module Incr
         @commit = global_options[:commit]
         @tag = global_options[:tag]
         @noop = global_options[:noop]
+        @identifier = global_options[:identifier]
       end
 
       def execute
@@ -42,7 +43,7 @@ module Incr
 
         file_version = package_json['version']
         old_version = SemVersion.new(file_version)
-        new_version = Incr::Service::Version.increment_segment(old_version, @segment)
+        new_version = Incr::Service::Version.increment_segment(old_version, @segment, @identifier)
 
         replace_file_version(@package_json_filename, new_version.to_s)
         replace_file_version(@package_json_lock_filename, new_version.to_s)

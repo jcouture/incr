@@ -12,13 +12,14 @@ version(Incr::VERSION)
 
 flag([:d, :version_file_dir], default_value: '.', desc: 'Directory where to search for version file')
 flag([:t, :tag_name_pattern], default_value: 'v%s', desc: 'Pattern for the tag name')
+flag([:i, :identifier], default_value: nil, desc: 'Identifier for the prerelease segment')
 
 switch(:commit, default_value: true, desc: 'Commit changes')
 switch(:tag, default_value: true, desc: 'Create a git tag')
 
 pre do |global, command, options, args|
-  if args.length != 1 || !['major', 'minor', 'patch'].any? {|segment| args.include?(segment)}
-    warn('expecting a single argument: major, minor or patch.')
+  if args.length != 1 || !['major', 'minor', 'patch', 'prerelease'].any? {|segment| args.include?(segment)}
+    warn('expecting a single argument: major, minor, patch or prerelease.')
     return false
   end
   true
