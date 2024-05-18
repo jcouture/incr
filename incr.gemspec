@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('sem_version', '2.0.1')
   spec.add_runtime_dependency('git', '1.19.1')
 
-  spec.add_development_dependency('rake', '13.1.0')
+  spec.add_development_dependency('rake', '13.2.1')
   spec.add_development_dependency('rspec', '3.12.0')
   spec.add_development_dependency('rubocop', '1.63.5')
   spec.add_development_dependency('meowcop', '3.2.0')
