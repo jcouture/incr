@@ -42,4 +42,13 @@ command :mix do |cmd|
   end
 end
 
+# Laravel Support
+desc('Increment the version of your config/app.php.')
+command :laravel do |cmd|
+  cmd.action do |global_options, options, args|
+    mix = Incr::Command::Laravel.new(args, global_options)
+    mix.execute
+  end
+end
+
 exit(run(ARGV))
