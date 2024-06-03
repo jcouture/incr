@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency('gli', '2.21.1')
   spec.add_runtime_dependency('sem_version', '2.0.1')
-  spec.add_runtime_dependency('git', '1.19.1')
+  spec.add_runtime_dependency('git', '2.1.1')
 
   spec.add_development_dependency('rake', '13.2.1')
   spec.add_development_dependency('rspec', '3.13.0')
